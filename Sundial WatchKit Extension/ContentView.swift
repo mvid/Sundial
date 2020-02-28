@@ -9,8 +9,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var lm = LocationManager()
+    let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
+    var offset: String    { return("\(String(describing: lm.offset))") }
     var body: some View {
-        Text("Hello World")
+        VStack {
+            Text("Hello World")
+            Text(offset)
+        }
     }
 }
 
