@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 import Combine
+import WatchConnectivity
 
 class LocationManager: NSObject, ObservableObject {
     private let locationManager = CLLocationManager()
@@ -43,8 +44,14 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
+        print("updated", location)
         self.location = location
         self.offset = self.locationOffset(date: Date())
+        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date(), userInfo: nil) { err in
+            if let err = err {
+                print(err)
+            }
+        }
     }
     
     func locationOffset(date: Date) -> Double? {
@@ -55,10 +62,13 @@ extension LocationManager: CLLocationManagerDelegate {
         }
     }
     
-    func locationOffsetDate(date: Date) -> Date {
-        let offset = self.locationOffset(date: date) ?? 0
-        print(offset)
+    func locationOffsetDate(date: Date) -> Date? {
+        let offset = self.locationOffset(date: date)
+        if offset == nil {
+            return nil
+        }
         let seconds = date.timeIntervalSince1970
-        return Date(timeIntervalSince1970: (seconds + (offset * 60 * 60)))
+        return Date(timeIntervalSince1970: (seconds + (offset! * 60 * 60)))
     }
 }
+

@@ -19,11 +19,15 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
     
     func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
-        handler(nil)
+        let calendar = Calendar.current
+        let startDate = calendar.date(byAdding: .day, value: -7, to: Date())
+        handler(startDate)
     }
     
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
-        handler(nil)
+        let calendar = Calendar.current
+        let endDate = calendar.date(byAdding: .day, value: 7, to: Date())
+        handler(endDate)
     }
     
     func getPrivacyBehavior(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationPrivacyBehavior) -> Void) {
@@ -35,19 +39,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getTemplate(for complication:CLKComplication, date:Date) -> CLKComplicationTemplate? {
         let locationManager = LocationManager()
         let offsetDate = locationManager.locationOffsetDate(date: date)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss"
-        let dateFormatterShort = DateFormatter()
-        dateFormatterShort.dateFormat = "HH:mm"
+        if offsetDate == nil {
+            return nil
+        }
         
         switch complication.family {
         case .modularSmall:
             let template = CLKComplicationTemplateModularSmallSimpleText()
-            template.textProvider = CLKSimpleTextProvider(text: dateFormatter.string(from: offsetDate), shortText: dateFormatterShort.string(from: offsetDate))
+            template.textProvider = CLKTimeTextProvider(date:offsetDate!)
             return template
         case .circularSmall:
             let template = CLKComplicationTemplateCircularSmallSimpleText()
-            template.textProvider = CLKSimpleTextProvider(text:dateFormatter.string(from: offsetDate), shortText: dateFormatterShort.string(from: offsetDate))
+            template.textProvider = CLKTimeTextProvider(date:offsetDate!)
             return template
         default:
             return nil
@@ -74,10 +77,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // Call the handler with the timeline entries prior to the given date
         let calendar = Calendar.current
         var entries = [CLKComplicationTimelineEntry]()
+        print(date, limit)
         
         for i in 0...limit {
-            let hour = -(i + 1)
-            let followingDate = calendar.date(byAdding: .hour, value: hour, to: date)
+            let followingDate = calendar.date(byAdding: .minute, value: -(i + 1), to: date)
             let entry = getComplicationTimelineEntryForDate(date: followingDate!, complication: complication)
             if entry != nil {
                 entries.append(entry!)
@@ -93,8 +96,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         var entries = [CLKComplicationTimelineEntry]()
         
         for i in 0...limit {
-            let hour = i + 1
-            let followingDate = calendar.date(byAdding: .hour, value: hour, to: date)
+            let followingDate = calendar.date(byAdding: .minute, value: i + 1, to: date)
             let entry = getComplicationTimelineEntryForDate(date: followingDate!, complication: complication)
             if entry != nil {
                 entries.append(entry!)

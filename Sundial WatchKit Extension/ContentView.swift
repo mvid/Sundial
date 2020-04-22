@@ -9,13 +9,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var currentDate = Date()
+    let timer = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect()
+
     @ObservedObject var lm = LocationManager()
-    let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
-    var offset: String    { return("\(String(describing: lm.offset))") }
+    var offset: String {
+        ("\(String(describing: lm.offset))")
+    }
+    var utc: String {
+        ("\(String(describing: currentDate))")
+    }
+    var date: String {
+        ("\(String(describing: lm.locationOffsetDate(date: currentDate)))")
+    }
     var body: some View {
         VStack {
-            Text("Hello World")
-            Text(offset)
+            Text("Sundial")
+            Text(utc)
+            Text(date)
+        }.onReceive(timer) { input in
+            self.currentDate = input
         }
     }
 }
