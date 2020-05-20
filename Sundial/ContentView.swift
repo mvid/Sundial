@@ -11,18 +11,17 @@ import CoreLocation
 
 struct ContentView: View {
     @ObservedObject var lm = LocationManager()
-    var date = Date()
     
-    var latitude: String  { return("\(lm.location?.coordinate.latitude ?? 0)") }
-    var longitude: String { return("\(lm.location?.coordinate.longitude ?? 0)") }
+    let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
+    
+    var latitude: String  { return("\(lm.location.coordinate.latitude)") }
+    var longitude: String { return("\(lm.location.coordinate.longitude)") }
     var status: String    { return("\(String(describing: lm.status))") }
     var current_time: String {
-        return("\(date)")
+        return("\(String(describing: lm.dateNow))")
     }
     var offset_time : String {
-        let seconds = date.timeIntervalSince1970
-        let offset_time = Date(timeIntervalSince1970: (seconds + ((lm.offset ?? 0) * 60 * 60)))
-        return("\(offset_time)")
+        return("\(String(describing: lm.offsetDateNow))")
     }
     var offset: String    { return("\(String(describing: lm.offset))") }
     

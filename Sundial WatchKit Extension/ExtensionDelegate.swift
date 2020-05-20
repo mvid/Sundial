@@ -2,14 +2,14 @@
 //  ExtensionDelegate.swift
 //  Sundial WatchKit Extension
 //
-//  Created by Mantas Vidutis on 11/12/19.
-//  Copyright © 2019 Mantas Vidutis. All rights reserved.
+//  Created by Mantas Vidutis on 5/19/20.
+//  Copyright © 2020 Mantas Vidutis. All rights reserved.
 //
 
 import WatchKit
-import CoreLocation
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate{
+class ExtensionDelegate: NSObject, WKExtensionDelegate {
+
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
     }

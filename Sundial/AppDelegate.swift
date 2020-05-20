@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Sundial
 //
-//  Created by Mantas Vidutis on 11/12/19.
-//  Copyright © 2019 Mantas Vidutis. All rights reserved.
+//  Created by Mantas Vidutis on 5/19/20.
+//  Copyright © 2020 Mantas Vidutis. All rights reserved.
 //
 
 import UIKit
