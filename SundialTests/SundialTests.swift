@@ -23,6 +23,20 @@ class SundialTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
+    func testAstro() throws {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm Z"
+        let testDate = formatter.date(from: "2013/01/01 00:30 Z")!
+        let julianDay = julianDayNumber(date: testDate)
+        let testJulianDate = 2_456_293.520_833
+        
+        XCTAssertLessThan(abs(julianDay - testJulianDate), 0.001)
+        
+        let convertedDate = gregorianDate(date: julianDay)
+        XCTAssertLessThan(abs(testDate.timeIntervalSince(convertedDate)), 10)
+        
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

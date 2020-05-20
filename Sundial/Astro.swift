@@ -47,7 +47,7 @@ func isLeapYear(year: Int16) -> Bool {
 
 func equationOfTime(fractionalYear: Double) -> Double {
     return 229.18 *
-            (0.000075 -
+        (0.000075 -
             (-0.001868 * cos(fractionalYear)) -
             (0.032077 * sin(fractionalYear)) -
             (0.014615 * cos(fractionalYear)) -
@@ -57,12 +57,26 @@ func equationOfTime(fractionalYear: Double) -> Double {
 // MARK - Attempt #2 from https://en.wikipedia.org/wiki/Sunrise_equation#Calculate_sunrise_and_sunset
 
 func julianDayNumber(date: Date) -> Double {
-    let calendar = Calendar.current
-    let dateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date)
-    return (1461.0 * (Double(dateComponents.year) + 4800.0 + (Double(dateComponents.month) - 14.0) / 12.0)) / 4.0
-            + (367.0 * (Double(dateComponents.month) - 2.0 - 12.0 * ((Double(dateComponents.month) - 14.0) / 12.0))) / 12.0
-            - (3.0 * ((Double(dateComponents.year) + 4900.0 + (Double(dateComponents.month) - 14.0) / 12.0) / 100.0)) / 4.0
-            + Double(dateComponents.day) - 32075.0
+    var calendar = Calendar.current
+    calendar.timeZone = TimeZone(identifier: "UTC")!
+    let dateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: date)
+    let day = dateComponents.day!
+    let month = dateComponents.month!
+    let year = dateComponents.year!
+    let hour = Double(dateComponents.hour!)
+    let minute = Double(dateComponents.minute!)
+    let second = Double(dateComponents.second!)
+    
+    // (1461 * (Y + 4800 + (M - 14)/12))/4 +(367 * (M - 2 - 12 * ((M - 14)/12)))/12 - (3 * ((Y + 4900 + (M - 14)/12)/100))/4 + D - 32075
+    let i:Int = (month - 14) / 12
+    var julianDay:Int = (1461 * (year + 4800 + i)) / 4
+    julianDay += (367 * (month - 2 - 12 * i)) / 12
+    julianDay -= (3 * ((year + 4900 + i) / 100)) / 4
+    julianDay += day - 32075
+    
+    let julianSubDay:Double = (hour - 12.0) / 24.0 + minute / 1440.0 + second / 86400.0 // we do not account for leap seconds
+    
+    return Double(julianDay) + julianSubDay
 }
 
 func meanSolarNoonJulianDay(longitude: CLLocationDegrees, date: Date) -> Double {
@@ -76,8 +90,8 @@ func solarMeanAnomaly(solarNoonJulianDay: Double) -> Double {
 
 func equationOfCenter(solarMeanAnomaly: Double) -> Double {
     (1.9148 * sin(solarMeanAnomaly))
-            + (0.02 * sin(2.0 * solarMeanAnomaly))
-            + (0.0003 * sin(3.0 * solarMeanAnomaly))
+        + (0.02 * sin(2.0 * solarMeanAnomaly))
+        + (0.0003 * sin(3.0 * solarMeanAnomaly))
 }
 
 func eclipticLongitude(solarMeanAnomaly: Double, equationOfCenter: Double) -> Double {
@@ -86,8 +100,8 @@ func eclipticLongitude(solarMeanAnomaly: Double, equationOfCenter: Double) -> Do
 
 func solarTransit(meanSolarNoonJulianDay: Double, solarMeanAnomaly: Double, eclipticLongitude: Double) -> Double {
     2451545.0 + meanSolarNoonJulianDay
-            + (0.0053 * sin(solarMeanAnomaly))
-            - (0.0069 * sin(2.0 * eclipticLongitude))
+        + (0.0053 * sin(solarMeanAnomaly))
+        - (0.0069 * sin(2.0 * eclipticLongitude))
 }
 
 func declinationOfSun(ecliptic longitude: Double) -> Double {
@@ -96,7 +110,7 @@ func declinationOfSun(ecliptic longitude: Double) -> Double {
 
 func hourAngle(_ latitude: CLLocationDegrees, meters elevation: Double, sun declination: Double) -> Double {
     let correction = -2.076 * sqrt(elevation) / 60
-    acos((sin(-0.83 + correction) - (sin(latitude) * sin(declination))) / (cos(latitude) * cos(declination)))
+    return acos((sin(-0.83 + correction) - (sin(latitude) * sin(declination))) / (cos(latitude) * cos(declination)))
 }
 
 func julienDateSunrise(solar transit: Double, hour angle: Double) -> Double {
@@ -110,24 +124,25 @@ func julienDateSunset(solar transit: Double, hour angle: Double) -> Double {
 func gregorianDate(date julian: Double) -> Date {
     let julianDay = Int(julian.rounded(.down))
     let julianSubDay = julian.truncatingRemainder(dividingBy: 1.0)
-
-    let f = julian + 1401 + (((4 * julian + 274277) / 146097) * 3) / 4 - 38
+    
+    let f = julianDay + 1401 + (((4 * julianDay + 274277) / 146097) * 3) / 4 - 38
     let e = 4 * f + 3
     let g = (e % 1461) / 4
     let h = 5 * g + 2
     let day = (h % 153) / 5 + 1
     let month = (h / 153 + 2) % 12 + 1
     let year = e / 1461 - 4716 + (12 + 2 - month) / 12
-
+    
     var dateComponents = DateComponents()
     dateComponents.year = year
     dateComponents.month = month
     dateComponents.day = day
     dateComponents.hour = 12
-
+    dateComponents.timeZone = TimeZone(identifier: "UTC")
+    
     let calendar = Calendar.current
     let convertedJulianDay = calendar.date(from: dateComponents)
     let interval = TimeInterval(86400.0 * julianSubDay) // not accounting for leap seconds
-
-    return convertedJulianDay?.addingTimeInterval(interval)
+    
+    return convertedJulianDay!.addingTimeInterval(interval)
 }
