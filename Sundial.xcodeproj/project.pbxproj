@@ -33,6 +33,8 @@
 		0F070DBA2474B68B0068E1BE /* Astro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F070DB82474B68B0068E1BE /* Astro.swift */; };
 		0F070DBB2474B68B0068E1BE /* Astro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F070DB82474B68B0068E1BE /* Astro.swift */; };
 		0F070DBC2474B68B0068E1BE /* Astro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F070DB82474B68B0068E1BE /* Astro.swift */; };
+		0F4037F5247620BE00A28DEA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0F4037F4247620BE00A28DEA /* Settings.bundle */; };
+		0F4037F72477107F00A28DEA /* Julian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4037F62477107F00A28DEA /* Julian.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +123,8 @@
 		0F070DB22474B66B0068E1BE /* Sundial WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sundial WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
 		0F070DB32474B66C0068E1BE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0F070DB82474B68B0068E1BE /* Astro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Astro.swift; sourceTree = "<group>"; };
+		0F4037F4247620BE00A28DEA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		0F4037F62477107F00A28DEA /* Julian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Julian.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,7 @@
 		0F070D4A2474B60F0068E1BE = {
 			isa = PBXGroup;
 			children = (
+				0F4037F4247620BE00A28DEA /* Settings.bundle */,
 				0F070D552474B60F0068E1BE /* Sundial */,
 				0F070D6C2474B6110068E1BE /* SundialTests */,
 				0F070D772474B6110068E1BE /* SundialUITests */,
@@ -192,6 +197,7 @@
 				0F070DB32474B66C0068E1BE /* LocationManager.swift */,
 				0F070DB22474B66B0068E1BE /* Sundial WatchKit App-Bridging-Header.h */,
 				0F070DB82474B68B0068E1BE /* Astro.swift */,
+				0F4037F62477107F00A28DEA /* Julian.swift */,
 			);
 			path = Sundial;
 			sourceTree = "<group>";
@@ -403,6 +409,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F4037F5247620BE00A28DEA /* Settings.bundle in Resources */,
 				0F070D632474B6110068E1BE /* LaunchScreen.storyboard in Resources */,
 				0F070D602474B6110068E1BE /* Preview Assets.xcassets in Resources */,
 				0F070D5D2474B6110068E1BE /* Assets.xcassets in Resources */,
@@ -452,6 +459,7 @@
 				0F070D572474B60F0068E1BE /* AppDelegate.swift in Sources */,
 				0F070D592474B60F0068E1BE /* SceneDelegate.swift in Sources */,
 				0F070DB92474B68B0068E1BE /* Astro.swift in Sources */,
+				0F4037F72477107F00A28DEA /* Julian.swift in Sources */,
 				0F070D5B2474B60F0068E1BE /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
