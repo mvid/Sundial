@@ -8,6 +8,28 @@
 	<array>
 		<dict>
 			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Offset Calculation Method</string>
+			<key>Key</key>
+			<string>calculationMethod</string>
+			<key>DefaultValue</key>
+			<string>LONGITUDE</string>
+			<key>Titles</key>
+			<array>
+				<string>Longitude based</string>
+				<string>Match solar noon to noon</string>
+				<string>Match 6am to sunrise and 6pm to sunset (*expert mode)</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>LONGITUDE</string>
+				<string>SOLAR_NOON</string>
+				<string>SOLAR_DAY</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Calculation Settings</string>

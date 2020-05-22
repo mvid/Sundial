@@ -6,6 +6,7 @@
 //  Copyright © 2020 Mantas Vidutis. All rights reserved.
 //
 
+import Foundation
 import XCTest
 import CoreLocation
 @testable import Sundial
@@ -24,37 +25,36 @@ class SundialTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-    
+
     func testJulianConversion() throws {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm Z"
         let testDate = formatter.date(from: "2013/01/01 00:30 Z")!
-        let julianDay = julianDate(date: testDate)
+        let julianDate = JulianDate(gregorian: testDate)
         let testJulianDate = 2_456_293.520_833
-        
-        XCTAssertLessThan(abs(julianDay - testJulianDate), 0.001)
-        
-        let convertedDate = gregorianDate(date: julianDay)
+
+        XCTAssertLessThan(abs(julianDate.julian - testJulianDate), 0.001)
+
+        let convertedDate = julianDate.gregorian
         XCTAssertLessThan(abs(testDate.timeIntervalSince(convertedDate)), 10)
     }
-    
+
     func testAstroCalculation() throws {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm Z"
-        let testDate = formatter.date(from: "2020/05/20 12:00 -0700")!
-        
-        let sanFrancisco = CLLocation(coordinate: CLLocationCoordinate2D(latitude:     37.773972, longitude: -122.431297), altitude: 10, horizontalAccuracy: 1, verticalAccuracy: 1, timestamp: testDate)
-        
-        let (sunrise, solarNoon, sunset) = sunTimesForDateLocation(date: testDate, location: sanFrancisco)
-        let expectedSolarNoon = formatter.date(from: "2020/05/20 13:06 -0700")
-        XCTAssertEqual(solarNoon, expectedSolarNoon!)
-        
-        let expectedSunrise = formatter.date(from: "2020/05/20 05:55 Z")
-        let expectedSunset = formatter.date(from: "2020/05/20 20:17 Z")
-        
-        XCTAssertEqual(sunrise, expectedSunrise!)
-        XCTAssertEqual(sunset, expectedSunset!)
-        
+        formatter.dateFormat = "yyyy/MM/dd HH:mm zzz"
+        let expectedSolarNoon = formatter.date(from: "2020/05/20 13:06 PDT")!
+
+        let sanFrancisco = CLLocation(coordinate: CLLocationCoordinate2D(latitude: 37.773972, longitude: -122.431297),
+                altitude: 10, horizontalAccuracy: 1, verticalAccuracy: 1, timestamp: expectedSolarNoon)
+
+        let (sunrise, solarNoon, sunset) = sunTimesForDateLocation(date: expectedSolarNoon, location: sanFrancisco)
+        XCTAssertLessThan(abs(expectedSolarNoon.timeIntervalSince(solarNoon)), 180, "mismatch for solar noon")
+
+        let expectedSunrise = formatter.date(from: "2020/05/20 05:55 PDT")!
+        let expectedSunset = formatter.date(from: "2020/05/20 20:17 PDT")!
+
+        XCTAssertLessThan(abs(expectedSunrise.timeIntervalSince(sunrise)), 180, "mismatch for sunrise")
+        XCTAssertLessThan(abs(expectedSunset.timeIntervalSince(sunset)), 180, "mismatch for sunset")
     }
 
     func testPerformanceExample() throws {

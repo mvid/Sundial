@@ -38,8 +38,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTemplate(for complication:CLKComplication, date:Date) -> CLKComplicationTemplate? {
         let locationManager = LocationManager()
-        let offsetDate = locationManager.locationOffsetDate(date: date)
-        let reverseOffsetDate = locationManager.locationReverseOffsetDate(date: date)
+        let offsetDate = locationManager.offsetDate(date: date)
+        let reverseOffsetDate = locationManager.solarReverseOffsetDate(date: date)
         
         switch complication.family {
         case .modularSmall:
