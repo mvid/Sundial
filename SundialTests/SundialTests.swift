@@ -57,6 +57,23 @@ class SundialTests: XCTestCase {
         XCTAssertLessThan(abs(expectedSunset.timeIntervalSince(sunset)), 180, "mismatch for sunset")
     }
 
+    func testSolarDayOffset() throws {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm zzz"
+        let testDate = formatter.date(from: "2020/05/31 15:31 PDT")!
+
+        let locationManager = LocationManager()
+        let sanFrancisco = CLLocation(coordinate: CLLocationCoordinate2D(latitude: 37.773972, longitude: -122.431297),
+                altitude: 10, horizontalAccuracy: 1, verticalAccuracy: 1, timestamp: testDate)
+        locationManager.location = sanFrancisco
+
+        let offset = locationManager.solarDayOffset(date: testDate)
+        let seconds = testDate.timeIntervalSince1970
+        let receivedDate = Date(timeIntervalSince1970: (seconds + (offset * 60 * 60)))
+
+
+    }
+
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

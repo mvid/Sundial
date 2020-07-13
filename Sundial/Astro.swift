@@ -75,17 +75,23 @@ func julianDateSunset(solarTransit: JulianDate, hourAngle: Double) -> JulianDate
 }
 
 
-func sunTimesForDateLocation(date: Date, location: CLLocation) -> (sunriseDate: Date, zenithDate: Date, sunsetDate: Date) {
-    let snjd = meanSolarNoonJulianDay(longitude: location.coordinate.longitude, date: date)
+func snelForDateLocation(date: Date, longitude: CLLocationDegrees) -> (solarNoon: JulianDate, el: Double) {
+    let snjd = meanSolarNoonJulianDay(longitude: longitude, date: date)
     let sma = solarMeanAnomaly(solarNoonJulianDay: snjd)
     let eoc = equationOfCenter(solarMeanAnomaly: sma)
     let el = eclipticLongitude(solarMeanAnomaly: sma, equationOfCenter: eoc)
-    let sTransit = solarTransit(meanSolarNoonJulianDay: snjd, solarMeanAnomaly: sma, eclipticLongitude: el)
+    let solarNoon = solarTransit(meanSolarNoonJulianDay: snjd, solarMeanAnomaly: sma, eclipticLongitude: el)
+    return (solarNoon, el)
+}
+
+
+func sunTimesForDateLocation(date: Date, location: CLLocation) -> (sunriseDate: Date, zenithDate: Date, sunsetDate: Date) {
+    let (solarNoon, el) = snelForDateLocation(date: date, longitude: location.coordinate.longitude)
     let dos = declinationOfSun(eclipticLongitude: el)
     let ha = hourAngle(latitude: location.coordinate.latitude, elevationMeters: location.altitude, sunDeclination: dos)
 
-    let jSunrise = julianDateSunrise(solarTransit: sTransit, hourAngle: ha)
-    let jSunset = julianDateSunset(solarTransit: sTransit, hourAngle: ha)
+    let jSunrise = julianDateSunrise(solarTransit: solarNoon, hourAngle: ha)
+    let jSunset = julianDateSunset(solarTransit: solarNoon, hourAngle: ha)
     
-    return (jSunrise.gregorian, sTransit.gregorian, jSunset.gregorian)
+    return (jSunrise.gregorian, solarNoon.gregorian, jSunset.gregorian)
 }

@@ -12,7 +12,7 @@
 			<key>Title</key>
 			<string>Offset Calculation Method</string>
 			<key>Key</key>
-			<string>calculationMethod</string>
+			<string>SundialCalculationMethod</string>
 			<key>DefaultValue</key>
 			<string>LONGITUDE</string>
 			<key>Titles</key>
@@ -33,16 +33,6 @@
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Calculation Settings</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Extra Stupid Mode</string>
-			<key>Key</key>
-			<string>enabled_preference</string>
-			<key>DefaultValue</key>
-			<true/>
 		</dict>
 	</array>
 </dict>

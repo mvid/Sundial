@@ -10,7 +10,6 @@
 		0F070D572474B60F0068E1BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F070D562474B60F0068E1BE /* AppDelegate.swift */; };
 		0F070D592474B60F0068E1BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F070D582474B60F0068E1BE /* SceneDelegate.swift */; };
 		0F070D5B2474B60F0068E1BE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F070D5A2474B60F0068E1BE /* ContentView.swift */; };
-		0F070D5D2474B6110068E1BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F070D5C2474B6110068E1BE /* Assets.xcassets */; };
 		0F070D602474B6110068E1BE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F070D5F2474B6110068E1BE /* Preview Assets.xcassets */; };
 		0F070D632474B6110068E1BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F070D612474B6110068E1BE /* LaunchScreen.storyboard */; };
 		0F070D6E2474B6110068E1BE /* SundialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F070D6D2474B6110068E1BE /* SundialTests.swift */; };
@@ -38,6 +37,9 @@
 		0F4037FE24771C2700A28DEA /* Julian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4037F62477107F00A28DEA /* Julian.swift */; };
 		0F4037FF24771C2800A28DEA /* Julian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4037F62477107F00A28DEA /* Julian.swift */; };
 		0F40380024771C2800A28DEA /* Julian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4037F62477107F00A28DEA /* Julian.swift */; };
+		0F641D5E2484E0710008F10A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F641D5D2484E0710008F10A /* Assets.xcassets */; };
+		0F641D5F2484E0710008F10A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F641D5D2484E0710008F10A /* Assets.xcassets */; };
+		0F641D602484E0710008F10A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F641D5D2484E0710008F10A /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,7 +103,6 @@
 		0F070D562474B60F0068E1BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F070D582474B60F0068E1BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0F070D5A2474B60F0068E1BE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		0F070D5C2474B6110068E1BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F070D5F2474B6110068E1BE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0F070D622474B6110068E1BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F070D642474B6110068E1BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,6 +129,7 @@
 		0F070DB82474B68B0068E1BE /* Astro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Astro.swift; sourceTree = "<group>"; };
 		0F4037F4247620BE00A28DEA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0F4037F62477107F00A28DEA /* Julian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Julian.swift; sourceTree = "<group>"; };
+		0F641D5D2484E0710008F10A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Downloads/Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,7 +195,7 @@
 				0F070D562474B60F0068E1BE /* AppDelegate.swift */,
 				0F070D582474B60F0068E1BE /* SceneDelegate.swift */,
 				0F070D5A2474B60F0068E1BE /* ContentView.swift */,
-				0F070D5C2474B6110068E1BE /* Assets.xcassets */,
+				0F641D5D2484E0710008F10A /* Assets.xcassets */,
 				0F070D612474B6110068E1BE /* LaunchScreen.storyboard */,
 				0F070D642474B6110068E1BE /* Info.plist */,
 				0F070D5E2474B6110068E1BE /* Preview Content */,
@@ -415,7 +417,7 @@
 				0F4037F5247620BE00A28DEA /* Settings.bundle in Resources */,
 				0F070D632474B6110068E1BE /* LaunchScreen.storyboard in Resources */,
 				0F070D602474B6110068E1BE /* Preview Assets.xcassets in Resources */,
-				0F070D5D2474B6110068E1BE /* Assets.xcassets in Resources */,
+				0F641D5E2484E0710008F10A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F070D862474B6120068E1BE /* Assets.xcassets in Resources */,
+				0F641D5F2484E0710008F10A /* Assets.xcassets in Resources */,
 				0F070D842474B6110068E1BE /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F070D9D2474B6120068E1BE /* Preview Assets.xcassets in Resources */,
+				0F641D602484E0710008F10A /* Assets.xcassets in Resources */,
 				0F070D9A2474B6120068E1BE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -712,7 +716,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				IBSC_MODULE = Sundial_WatchKit_Extension;
@@ -738,7 +742,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				IBSC_MODULE = Sundial_WatchKit_Extension;
